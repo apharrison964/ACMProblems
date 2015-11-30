@@ -19,7 +19,9 @@ public class RefractFacts {
 			double max = Double.MAX_VALUE;
 			double solution = 0;
 			double leftHand = n1 / n2;
+			
 			for(phi = 0; phi <= 90; phi += 0.01) {
+				
 				phiRad = Math.toRadians(phi);
 				double tan = Math.tan(phiRad);
 				double one = (d / tan);
