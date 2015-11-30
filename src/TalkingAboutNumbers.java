@@ -1,5 +1,3 @@
-package com.vogella.junit.first;
-
 import java.util.*;
 public class TalkingAboutNumbers {
 
