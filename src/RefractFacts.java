@@ -3,7 +3,6 @@ import java.util.*;
 
 public class RefractFacts {
 
-// Work in progress
 	public static void main(String[] args) {
 		Scanner s = new Scanner(System.in);
 		int d = s.nextInt();
@@ -11,24 +10,40 @@ public class RefractFacts {
 		int x = s.nextInt();
 		double n1 = s.nextFloat();
 		double n2 = s.nextFloat();
-		double angle1 = 0;
-		double angle2 = 0;
-		double angle1Rad = 0;
-		double angle2Deg = 0;
+		double phiRad = 0;
+		double phi = 0;
+		double rightHand = 0;
 
-		for(int i = 0; i <= 90; i++) {
-			angle1 = i;
-			angle1Rad = Math.toRadians(angle1);
-			angle2 = Math.asin((n2 * Math.sin(angle1Rad)) / n1);
-			angle2Deg = Math.toDegrees(angle2);
+		while(d != 0 && h != 0 && x != 0 && n1 != 0 && n2 != 0) {
+
+			double max = Double.MAX_VALUE;
+			double solution = 0;
+			double leftHand = n1 / n2;
+			for(phi = 0; phi <= 90; phi += 0.01) {
+				phiRad = Math.toRadians(phi);
+				double tan = Math.tan(phiRad);
+				double one = (d / tan);
+				double xminusdsquared = Math.pow((x - one), 2);
+				double numerator = Math.sqrt(xminusdsquared + Math.pow(h, 2));		
+				double xminusd = x - one;
+				double other = Math.sqrt((Math.pow(d, 2)) / Math.pow(tan, 2) + Math.pow(d, 2));
+				rightHand = one * (numerator / (xminusd * other));
+
+				double error = Math.abs(leftHand - rightHand);
+
+				if(error <= max) {
+					solution = phi;
+					max = error;
+				}
+			}
 			
+			d = s.nextInt();
+			h = s.nextInt();
+			x = s.nextInt();
+			n1 = s.nextFloat();
+			n2 = s.nextFloat();
+			System.out.printf("%.02f\n", solution);
 		}
-		System.out.println(d);
-		System.out.println(h);
-		System.out.println(x);
-		System.out.println(n1);
-		System.out.println(n2);
-		System.out.println(angle2Deg);
 
 	}
 
